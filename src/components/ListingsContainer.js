@@ -6,7 +6,16 @@ function ListingsContainer({ search, listings, setListings }) {
   const filteredListings = listings.filter((listing) =>
     listing.description.toLowerCase().includes(search.toLowerCase())
   );
-  const allListings = filteredListings.map((listing) => {
+
+  const sortedListings = filteredListings.sort((listing1, listing2) => {
+    if (!sortBy) {
+      return 0;
+    } else {
+      return listing1[sortBy].localeCompare(listing2[sortBy]);
+    }
+  });
+
+  const allListings = sortedListings.map((listing) => {
     return (
       <ListingCard
         key={listing.id}
@@ -22,14 +31,14 @@ function ListingsContainer({ search, listings, setListings }) {
 
   function sortListings(e) {
     setSortBy(e.target.value);
-    const sortedListings = filteredListings.sort((listing1, listing2) => {
-      if (!sortBy) {
-        return 0;
-      } else {
-        return listing1[sortBy].localeCompare(listing2[sortBy]);
-      }
-    });
-    return setListings(sortedListings);
+    // const sortedListings = filteredListings.sort((listing1, listing2) => {
+    //   if (!sortBy) {
+    //     return 0;
+    //   } else {
+    //     return listing1[sortBy].localeCompare(listing2[sortBy]);
+    //   }
+    // });
+    // return setListings(sortedListings);
   }
 
   return (

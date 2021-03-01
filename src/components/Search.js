@@ -3,7 +3,7 @@ import React from "react";
 function Search({ search, setSearch }) {
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+    console.log(e.target.value);
   }
   return (
     <form className="searchbar" onSubmit={handleSubmit}>
